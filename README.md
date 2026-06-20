@@ -142,7 +142,7 @@ pip install -r requirements.txt
 
 # 3. (Optional) enable AI-generated explanations and study plans
 cp .env.example .env
-# edit .env and add your ANTHROPIC_API_KEY
+# edit .env and add your API_KEY
 export $(grep -v '^#' .env | xargs)   # or use python-dotenv / your shell's method
 
 # 4. Run it
@@ -155,7 +155,7 @@ database (`data/acesat.db`) is created automatically on first run.
 
 **Running without an API key works fine** — you'll see a note in the
 console, and the app uses its rule-based fallbacks for explanations and
-the weekly plan instead of Claude-generated text.
+the weekly plan.
 
 ## Project structure
 
