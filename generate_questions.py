@@ -297,7 +297,7 @@ add("ei5", "expression_of_ideas", 3,
 
 # ---------------- Standard English Conventions ----------------
 add("se1", "standard_english_conventions", 1,
-    "Choose the correct version of the underlined portion.\n'Each of the students [have/has] submitted their assignment.'",
+    "Choose the correct version of the underlined portion.\n'Each of the students ____[have/has] submitted their assignment.'",
     ["A) have", "B) has", "C) having", "D) had have"], "B",
     "'Each' is singular, so it takes the singular verb 'has,' even though 'students' is plural.",
     misconception="subject_verb_agreement")
