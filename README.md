@@ -50,7 +50,7 @@ in a row, the agent doesn't just serve another question — it calls Claude
 continuing. This is the clearest "takes initiative" moment in the app.
 
 **5. Weekly plan agent.** On request, the agent hands its entire mastery
-profile to Claude and asks for a structured 7-day plan (focus skill +
+profile to API and asks for a structured 7-day plan (focus skill +
 question count + note per day, plus a motivational summary), parsed as
 JSON. If the API is unavailable or returns malformed JSON, a deterministic
 rule-based planner (sort skills by weakness, distribute practice across
@@ -104,7 +104,7 @@ included.
 3. Render auto-detects Python. Set:
    - **Build command:** `pip install -r requirements.txt`
    - **Start command:** `gunicorn app:app`
-4. (Optional) Under **Environment**, add `ANTHROPIC_API_KEY` to enable
+4. (Optional) Under **Environment**, add `API_KEY` to enable
    AI-generated explanations and study plans. Without it, the app still
    works fully on its rule-based fallbacks.
 5. Click **Create Web Service**. First deploy takes a couple of minutes;
