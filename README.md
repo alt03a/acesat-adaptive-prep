@@ -84,7 +84,7 @@ production (see Future Work).
   dependency. The entire page weighs a few dozen KB, so it loads fast on
   school wifi or a limited data plan. Mobile-first, large tap targets,
   visible keyboard focus, respects `prefers-reduced-motion`.
-- **AI calls degrade gracefully.** Every Claude-dependent feature
+- **AI calls degrade gracefully.** Every AI-dependent feature
   (explanations, weekly plan) has a deterministic fallback. If the API key
   is missing, the network is down, or a call is slow, the app still works
   end-to-end — it just uses rule-based text instead of generated text.
