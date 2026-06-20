@@ -611,7 +611,7 @@
       "subject": "reading_writing",
       "difficulty": 1,
       "passage": null,
-      "prompt": "Choose the correct version of the underlined portion.\n'Each of the students [have/has] submitted their assignment.'",
+      "prompt": "Choose the correct version of the underlined portion.\n'Each of the students ___[have/has] submitted their assignment.'",
       "choices": [
         "A) have",
         "B) has",
