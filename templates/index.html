@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>AceSAT — Adaptive Prep Agent</title>
+<meta name="description" content="An SAT prep agent that diagnoses weak skills and builds a personalized study plan.">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">Ace<span class="brand-mark-accent">SAT</span></span>
+    <span class="brand-tag">adaptive prep agent</span>
+  </div>
+  <nav class="tabs" id="tabs" hidden>
+    <button class="tab-btn is-active" data-screen="practice">Practice</button>
+    <button class="tab-btn" data-screen="progress">Progress</button>
+    <button class="tab-btn" data-screen="plan">Plan</button>
+  </nav>
+</header>
+
+<main id="app">
+
+  <!-- LOGIN -->
+  <section id="screen-login" class="screen is-active">
+    <div class="login-card">
+      <p class="eyebrow">Start a session</p>
+      <h1>Your tireless SAT tutor, built for one student: you.</h1>
+      <p class="login-copy">This agent runs a quick diagnostic, finds exactly where you're
+        losing points, and decides what to practice next — every single time.</p>
+      <form id="login-form">
+        <label for="student-name">What's your name?</label>
+        <input id="student-name" type="text" autocomplete="given-name" placeholder="e.g. Maria" required>
+        <button type="submit" class="btn-primary">Start practicing</button>
+      </form>
+      <p class="login-note">No account, no password — just type a name to begin or resume.</p>
+    </div>
+  </section>
+
+  <!-- PRACTICE -->
+  <section id="screen-practice" class="screen">
+    <div id="nudge-banner" class="nudge-banner" hidden>
+      <span id="nudge-text"></span>
+      <button id="nudge-dismiss" aria-label="Dismiss">×</button>
+    </div>
+
+    <div class="practice-layout">
+      <div class="practice-main">
+
+        <div class="agent-move" id="agent-move">
+          <div class="agent-move-head">
+            <span class="agent-dot" aria-hidden="true"></span>
+            <span class="agent-move-label">Agent's move</span>
+            <span class="diff-badge" id="diff-badge">Level 1</span>
+          </div>
+          <p id="agent-reasoning">Loading your first question…</p>
+          <div id="diagnostic-progress" class="diagnostic-progress" hidden>
+            <div class="diagnostic-progress-track">
+              <div class="diagnostic-progress-fill" id="diagnostic-progress-fill"></div>
+            </div>
+            <span id="diagnostic-progress-label"></span>
+          </div>
+        </div>
+
+        <div class="question-card" id="question-card">
+          <p class="skill-pill" id="skill-pill">—</p>
+          <p class="passage" id="passage" hidden></p>
+          <p class="prompt" id="prompt"></p>
+          <div class="choices" id="choices"></div>
+        </div>
+
+        <div class="feedback-card" id="feedback-card" hidden>
+          <p class="feedback-status" id="feedback-status"></p>
+          <p class="feedback-explanation" id="feedback-explanation"></p>
+          <button class="btn-primary" id="next-question-btn">Next question</button>
+        </div>
+
+      </div>
+
+      <aside class="skill-ladder" id="skill-ladder-aside">
+        <p class="ladder-title">Mastery so far</p>
+        <div id="ladder-bars" class="ladder-bars"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- PROGRESS -->
+  <section id="screen-progress" class="screen">
+    <h2>Progress</h2>
+    <div class="stat-row" id="stat-row"></div>
+    <div class="ladder-bars ladder-bars--full" id="progress-ladder"></div>
+  </section>
+
+  <!-- PLAN -->
+  <section id="screen-plan" class="screen">
+    <h2>This week's plan</h2>
+    <p class="plan-intro">The agent reviews your mastery profile and builds a 7-day plan —
+      regenerate any time after more practice.</p>
+    <button class="btn-primary" id="generate-plan-btn">Generate my weekly plan</button>
+    <p class="plan-source" id="plan-source" hidden></p>
+    <p class="plan-motivation" id="plan-motivation" hidden></p>
+    <div class="plan-days" id="plan-days"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  Built for AceSAT — closing the SAT prep gap for underserved students.
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
