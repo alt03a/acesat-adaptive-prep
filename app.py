@@ -24,7 +24,6 @@ import json
 import os
 import random
 import sqlite3
-import time
 from datetime import datetime, timezone
 
 from flask import Flask, g, jsonify, request, send_from_directory
@@ -268,23 +267,25 @@ def public_question(q):
 # ----------------------------------------------------------------------
 # Claude integration with deterministic fallbacks
 # ----------------------------------------------------------------------
-def call_claude(system, user_prompt, max_tokens=400, timeout_s=12):
+def call_claude(system, user_prompt, max_tokens=400, timeout_s=25):
     if _anthropic_client is None:
         return None
     try:
-        start = time.time()
         resp = _anthropic_client.messages.create(
             model=ANTHROPIC_MODEL,
             max_tokens=max_tokens,
             system=system,
             messages=[{"role": "user", "content": user_prompt}],
+            timeout=timeout_s,  # real request timeout, enforced by the SDK/httpx —
+                                # NOT a post-hoc check, so a valid response that takes
+                                # a while is still used instead of being discarded
         )
-        if time.time() - start > timeout_s:
-            return None
         parts = [b.text for b in resp.content if getattr(b, "type", "") == "text"]
         return "\n".join(parts).strip() or None
     except Exception as e:
-        print(f"[agent] Claude call failed, using fallback: {e}")
+        # Logged so the real cause (auth, rate limit, timeout, etc.) is visible
+        # in your hosting provider's logs instead of just silently falling back.
+        print(f"[agent] Claude call failed ({type(e).__name__}): {e}")
         return None
 
 
@@ -395,6 +396,7 @@ def build_study_plan(db, student_id):
         ),
         user_prompt=f"Student mastery profile:\n{summary}",
         max_tokens=600,
+        timeout_s=40,
     )
 
     if ai_text:
